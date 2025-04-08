@@ -9,7 +9,7 @@ class A:
         self.fila_s, self.columna_s = self.buscar_salida()  # guarda las coordenadas de la salida
         self.visitados = [[100 for _ in range(len(self.lab.tabla[0]))] for _ in range(len(self.lab.tabla))]  # crea una tabla del tamaño del laberinto en la que cada casilla corresponde a una del laberinto y va guardando las veces que se visita
         self.camino = [[None for _ in range(len(self.lab.tabla[0]))] for _ in range(len(self.lab.tabla))]
-        self.visitados[self.fila_e][self.columna_e] = 1
+        self.visitados[self.fila_e][self.columna_e] = 0
         self.heuris = Heuristica(nombre)
 
 
@@ -44,7 +44,7 @@ class A:
         cnt = 0
         encontrado = False
 
-        while not abierta.empty() and cnt<1000:
+        while not abierta.empty():
             f,g,h,x,y= abierta.get()
             if (x, y) == (S[0], S[1]):
                 print("El agente deliberativo ha encontrado la salida en la posicion: " + str(x) + " , " + str(y) + " en " + str(cnt) + " iteraciones")
