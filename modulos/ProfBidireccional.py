@@ -89,5 +89,3 @@ class ProfBidireccional:
         for (i, j) in caminoTotal:
             if self.lab.tabla[i][j] != "S" and self.lab.tabla[i][j] != "E":
                 self.lab.tabla[i][j] = "-"
-
-
