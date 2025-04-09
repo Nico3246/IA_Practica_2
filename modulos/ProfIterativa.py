@@ -22,17 +22,19 @@ class ProfIterativa:
 
     def moverse(self):
         limite=1
+        cnt=0
 
         while True:
             self.visitados = [[False for _ in range(len(self.lab.tabla[0]))] for _ in range(len(self.lab.tabla))]  # crea una tabla del tamaño del laberinto en la que cada casilla cor
             self.camino = []
             resultado=self.dfs_limitado(self.fila_e, self.columna_e,limite)
             if resultado:
-                print("El agente deliberativo ha encontrado la salida a profundiad " + str(limite))
+                print("El agente deliberativo ha encontrado la salida en " + str(cnt) + " iteraciones " )
                 self.pintar_camino()
                 return
 
             limite+=1
+            cnt+=1
 
 
     def dfs_limitado(self, x, y, limite):

@@ -4,6 +4,7 @@ from BusquedaProfundidad import BusquedaProfundidad
 from Heuristicas import Heuristica
 from ProfBidireccional import ProfBidireccional
 from ProfIterativa import ProfIterativa
+from ProfLimite import ProfLimite
 
 def menu(lab,nombreHeur):
     while True:
@@ -14,8 +15,9 @@ def menu(lab,nombreHeur):
         print("3. Iniciar el algoritmo de busqueda en anchura")
         print("4. Iniciar el algoritmo de busqueda en profundidad bidireccional")
         print("5. Iniciar el algoritmo de busqueda en profundidad iterativa")
-        print("6. Reiniciar el laberinto")
-        print("7. Cambiar heuristica")
+        print("6. Iniciar el algoritmo de busqueda en profundidad con limite")
+        print("7. Reiniciar el laberinto")
+        print("8. Cambiar heuristica")
         print("4. Salir")
         opcion = input("Ingrese una opcion: ")
 
@@ -51,6 +53,15 @@ def menu(lab,nombreHeur):
             lab.mostrarLaberinto()
 
         if opcion == "6":
+            print("\n")
+            print("Ingrese el limite de profundidad: ")
+            limite = int(input())
+            pl = ProfLimite(lab)
+            pl.moverse(limite)
+            print("\n")
+            lab.mostrarLaberinto()
+
+        if opcion == "7":
             op = input("¿Quiere reiniciar el laberinto?S/N: ")
             if op == 'S' or op == 's':
                 lab.cargarLaberinto("Laberinto.txt")

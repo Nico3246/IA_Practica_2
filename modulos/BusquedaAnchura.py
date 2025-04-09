@@ -43,7 +43,7 @@ class BusquedaAnchura:
             cnt +=1
 
             if actual == S:
-                print("El agente deliberativo ha encontrado la salida en la posicion: " + str(actual[0]) + " , " + str(actual[1]) + " en " + cnt + " iteraciones")
+                print("El agente deliberativo ha encontrado la salida en la posicion: " + str(actual[0]) + " , " + str(actual[1]) + " en " + str(cnt) + " iteraciones")
                 encontrado=True
 
             else:
@@ -56,6 +56,9 @@ class BusquedaAnchura:
                             self.visitados[fila_sig][columna_sig] = True
                             cola.put((fila_sig, columna_sig))
                             self.padre[fila_sig][columna_sig] = x,y
+
+            cnt += 1
+
             if encontrado:
                 self.pintar_camino()
             else:

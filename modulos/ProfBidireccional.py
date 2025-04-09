@@ -6,14 +6,10 @@ class ProfBidireccional:
         self.lab = lab
         self.Entrada = self.buscar_entrada()  # guarda las coordenadas de la entrada
         self.Salida = self.buscar_salida()  # guarda las coordenadas de la salida
-        self.visitadosInicio = [[None for _ in range(len(self.lab.tabla[0]))] for _ in range(
-            len(self.lab.tabla))]  # crea una tabla del tamaño del laberinto en la que cada casilla cor
-        self.visitadosMeta = [[None for _ in range(len(self.lab.tabla[0]))] for _ in range(
-            len(self.lab.tabla))]  # crea una tabla del tamaño del laberinto en la que cada casilla cor
-        self.padreInicio = [[None for _ in range(len(self.lab.tabla[0]))] for _ in range(
-            len(self.lab.tabla))]  # crea una tabla del tamaño del laberinto en la que cada casilla cor
-        self.padreMeta = [[None for _ in range(len(self.lab.tabla[0]))] for _ in range(
-            len(self.lab.tabla))]  # crea una tabla del tamaño del laberinto en la que cada casilla cor
+        self.visitadosInicio = [[None for _ in range(len(self.lab.tabla[0]))] for _ in range(len(self.lab.tabla))]  # crea una tabla del tamaño del laberinto en la que cada casilla cor
+        self.visitadosMeta = [[None for _ in range(len(self.lab.tabla[0]))] for _ in range(len(self.lab.tabla))]  # crea una tabla del tamaño del laberinto en la que cada casilla cor
+        self.padreInicio = [[None for _ in range(len(self.lab.tabla[0]))] for _ in range(len(self.lab.tabla))]  # crea una tabla del tamaño del laberinto en la que cada casilla cor
+        self.padreMeta = [[None for _ in range(len(self.lab.tabla[0]))] for _ in range(len(self.lab.tabla))]  # crea una tabla del tamaño del laberinto en la que cada casilla cor
         self.colaInicio = queue.Queue()
         self.colaMeta = queue.Queue()
 
