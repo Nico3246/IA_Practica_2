@@ -87,7 +87,7 @@ def menuH(lab):
         print("1. Manhattan")
         print("2. Euclidia")
         print("3. Personal")
-        print("4. Salir")
+        print("5. Salir")
         opcion = input("Ingrese una opcion: ")
 
         if opcion == "1":
@@ -100,7 +100,6 @@ def menuH(lab):
 
         if opcion == "3":
             return "Personal"
-
 
         if opcion == "4":
             return None
