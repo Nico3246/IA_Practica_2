@@ -66,7 +66,7 @@ class A:
                         self.camino[fila_sig][columna_sig] = (x, y) #almacena el camino
                         abierta.put((f_nuevo, g_nuevo, h_nuevo, fila_sig, columna_sig)) #agrega la posible posicion a la cola
             cnt+=1
-        if cnt==1000 or encontrado == False:
+        if encontrado == False:
             print("No se ha encontrado la salida")
 
 
