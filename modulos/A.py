@@ -28,14 +28,14 @@ class A:
         return None,None
 
 
-    def heuristica(self, pos1, pos2 , columna_s, fila_s):
-        return self.heuris.devolverHeuristica(pos1, pos2, columna_s, fila_s)
+    def heuristica(self, fila_actual, columna_actual , fila_s, columna_s):
+        return self.heuris.devolverHeuristica(fila_actual, columna_actual, fila_s, columna_s)
 
     def moverse(self): #algoritmo A*
         E = self.buscar_entrada()
         S = self.buscar_salida()
         fila_s , columna_s = S
-        h = self.heuristica(E[0], E[1],columna_s,fila_s ) #heuristica
+        h = self.heuristica(E[0], E[1],fila_s,columna_s ) #heuristica
         g = 0 #costo actual
         f = g + h #costo total estimado
         abierta = PriorityQueue()

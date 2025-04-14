@@ -5,19 +5,21 @@ from Heuristicas import Heuristica
 from ProfBidireccional import ProfBidireccional
 from ProfIterativa import ProfIterativa
 from ProfLimite import ProfLimite
+from IDA import IDA
 
 def menu(lab,nombreHeur):
     while True:
         print("\n")
         print("MENU")
-        print("1. Iniciar el algoritmo de busqueda a*")
+        print("1. Iniciar A*")
         print("2. Iniciar el algoritmo de busqueda en profundidad")
         print("3. Iniciar el algoritmo de busqueda en anchura")
         print("4. Iniciar el algoritmo de busqueda en profundidad bidireccional")
         print("5. Iniciar el algoritmo de busqueda en profundidad iterativa")
         print("6. Iniciar el algoritmo de busqueda en profundidad con limite")
-        print("7. Reiniciar el laberinto")
-        print("8. Cambiar heuristica")
+        print("7. Iniciar IDA*")
+        print("8. Reiniciar el laberinto")
+        print("9. Cambiar heuristica")
         print("4. Salir")
         opcion = input("Ingrese una opcion: ")
 
@@ -62,12 +64,18 @@ def menu(lab,nombreHeur):
             lab.mostrarLaberinto()
 
         if opcion == "7":
+            ida=IDA(lab,nombreHeur)
+            ida.moverse()
+            print("\n")
+            lab.mostrarLaberinto()
+
+        if opcion == "8":
             op = input("¿Quiere reiniciar el laberinto?S/N: ")
             if op == 'S' or op == 's':
                 lab.cargarLaberinto("Laberinto.txt")
                 lab.mostrarLaberinto()
 
-        if opcion == "7":
+        if opcion == "9":
             nombreHeur = None
             nombreHeur = menuH(lab)
 

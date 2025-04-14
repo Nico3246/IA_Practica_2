@@ -4,7 +4,7 @@ class laberinto:
 
     def __init__(self):
         self.x = random.randint(5,20)
-        self.y = random.randint(15,20)
+        self.y = random.randint(10,20)
         #Crear la tabla en el que estara el laberinto con un tamañano aleatorio
         self.tabla=[[" " for _ in range(self.y)] for _ in range(self.x)]
 
