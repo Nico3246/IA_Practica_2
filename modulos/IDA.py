@@ -23,7 +23,7 @@ class IDA:
         return None, None
 
     def heuristica(self, fila_actual, columna_actual, fila_s, columna_s):
-        return self.heuris.devolverHeuristica(fila_actual, columna_actual, fila_s, columna_s)
+        return round(self.heuris.devolverHeuristica(fila_actual, columna_actual, fila_s, columna_s))
 
     def IDA(self,x,y,g,umbral,salida):
         h=self.heuristica(x,y,self.fila_s,self.columna_s)

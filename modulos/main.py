@@ -6,6 +6,7 @@ from ProfBidireccional import ProfBidireccional
 from ProfIterativa import ProfIterativa
 from ProfLimite import ProfLimite
 from IDA import IDA
+from GBFS import GBFS
 
 def menu(lab,nombreHeur):
     while True:
@@ -18,9 +19,10 @@ def menu(lab,nombreHeur):
         print("5. Iniciar el algoritmo de busqueda en profundidad iterativa")
         print("6. Iniciar el algoritmo de busqueda en profundidad con limite")
         print("7. Iniciar IDA*")
-        print("8. Reiniciar el laberinto")
-        print("9. Cambiar heuristica")
-        print("4. Salir")
+        print("8. Iniciar GBFS")
+        print("9. Reiniciar el laberinto")
+        print("10. Cambiar heuristica")
+        print("11. Salir")
         opcion = input("Ingrese una opcion: ")
 
         if opcion == "1":
@@ -70,12 +72,19 @@ def menu(lab,nombreHeur):
             lab.mostrarLaberinto()
 
         if opcion == "8":
+            gbfs = GBFS(lab, nombreHeur)
+            gbfs.moverse()
+            print("\n")
+            lab.mostrarLaberinto()
+
+
+        if opcion == "9":
             op = input("¿Quiere reiniciar el laberinto?S/N: ")
             if op == 'S' or op == 's':
                 lab.cargarLaberinto("Laberinto.txt")
                 lab.mostrarLaberinto()
 
-        if opcion == "9":
+        if opcion == "10":
             nombreHeur = None
             nombreHeur = menuH(lab)
 
@@ -84,7 +93,7 @@ def menu(lab,nombreHeur):
             else:
                 print("No se selecciono ninguna heuristica")
 
-        if opcion == "4":
+        if opcion == "11":
             break
 
 def menuH(lab):
