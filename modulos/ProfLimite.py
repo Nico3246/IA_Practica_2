@@ -83,6 +83,7 @@ class ProfLimite:
 
 
         if encontrado:
+            print("Solucion encontrada usando el algoritmo Busqueda en profundidad con limite")
             self.pintar_camino()
             self.caminoRecorrido()
             print("Nodos expandidos: " + self.nodosExpandidos())
@@ -99,7 +100,7 @@ class ProfLimite:
     def pintar_camino(self):
         for (i, j) in self.camino:
             if self.lab.tabla[i][j] != "S" and self.lab.tabla[i][j] != "E":
-                self.lab.tabla[i][j] = "-"
+                self.lab.tabla[i][j] = "."
 
 
     def caminoRecorrido(self):

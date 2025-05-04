@@ -88,7 +88,7 @@ class GBFS:
         while self.camino[x][y] is not None:
             x, y = self.camino[x][y]
             if self.lab.tabla[x][y] != "S" and self.lab.tabla[x][y] != "E":
-                self.lab.tabla[x][y] = "+"
+                self.lab.tabla[x][y] = "."
 
 
     def caminoRecorrido(self):

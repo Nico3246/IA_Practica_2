@@ -15,7 +15,7 @@ def medir_tiempo_ejecucion(algoritmo):
     inicio = time.time_ns()
     algoritmo.moverse()
     fin = time.time_ns()
-    duracion_microsegundos = (fin - inicio) // 1000
+    duracion_microsegundos = (fin - inicio) / 1000
     print("Tiempo de ejecucion: " + str(duracion_microsegundos) + "ns")
 
 def menu(lab,nombreHeur):

@@ -68,7 +68,7 @@ class ProfIterativa:
     def pintar_camino(self):
         for (i, j) in self.camino:
             if self.lab.tabla[i][j] != "S" and self.lab.tabla[i][j] != "E":
-                self.lab.tabla[i][j] = "-"
+                self.lab.tabla[i][j] = "."
 
     def caminoRecorrido(self):
         print("Camino Recorrido (x,y): ")

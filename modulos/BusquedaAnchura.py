@@ -92,7 +92,7 @@ class BusquedaAnchura:
 
         for (i, j) in camino:
             if self.lab.tabla[i][j] != "S" and self.lab.tabla[i][j] != "E":
-                self.lab.tabla[i][j] = "-"
+                self.lab.tabla[i][j] = "."
 
 
     def caminoRecorrido(self):
