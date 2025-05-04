@@ -6,7 +6,10 @@ class IDA:
         self.fila_e, self.columna_e = self.buscar_entrada()  # guarda las coordenadas de la entrada
         self.fila_s, self.columna_s = self.buscar_salida()  # guarda las coordenadas de la salida
         self.camino = [[None for _ in range(len(self.lab.tabla[0]))] for _ in range(len(self.lab.tabla))]
+        self.visitados = [[False for _ in range(len(self.lab.tabla[0]))] for _ in range(len(self.lab.tabla))]
+        self.visitados[self.fila_e][self.columna_e] = True
         self.heuris = Heuristica(nombre)
+
 
     def buscar_entrada(self):
         for i in range(len(self.lab.tabla)):
@@ -43,13 +46,13 @@ class IDA:
 
             if self.lab.tabla[fila_sig][columna_sig] == " " or self.lab.tabla[fila_sig][columna_sig] == "." or self.lab.tabla[fila_sig][columna_sig] == "S":
                 self.camino[fila_sig][columna_sig] = (x,y)
+                self.visitados[fila_sig][columna_sig] = True
                 res=self.IDA(fila_sig, columna_sig, g+1, umbral, salida)
                 if res == "encontrado":
                     self.camino[fila_sig][columna_sig] = (x, y)
                     return "encontrado"
                 elif res < min_val:
                     min_val = res
-
 
         return min_val
 
@@ -64,8 +67,10 @@ class IDA:
             salida=self.IDA(E[0],E[1],0,umbral,S)
 
             if salida == "encontrado":
-                print("El agente ha encontrado la salida en " , umbral)
+                print("Solucion encontrada usando el algoritmo IDA*")
                 self.pintar_camino(S)
+                self.caminoRecorrido()
+                print("Nodos expandidos: " + self.nodosExpandidos())
                 return
 
             umbral = salida
@@ -76,3 +81,21 @@ class IDA:
             x, y = self.camino[x][y]
             if self.lab.tabla[x][y] != "S" and self.lab.tabla[x][y] != "E":
                 self.lab.tabla[x][y] = "+"
+
+
+    def caminoRecorrido(self):
+        print("Camino Recorrido (x,y): ")
+        for i in range(len(self.camino)):
+            for j in range(len(self.camino[0])):
+                if self.camino[i][j] is not None:
+                    print("[",i,",",j,"],",end=" ")
+        print()
+
+
+    def nodosExpandidos(self):
+        nodos = 0
+        for i in range(len(self.visitados)):
+            for j in range(len(self.visitados[0])):
+                if self.visitados[i][j]:
+                    nodos += 1
+        return str(nodos)

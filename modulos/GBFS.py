@@ -40,17 +40,24 @@ class GBFS:
         abierta = PriorityQueue()
         abierta.put((h, E[0], E[1]))
         movimientos = [(-1, 0), (1, 0), (0, -1), (0, 1)] #arriba,abajo,izquierda,derecha
-        cnt = 0
+        encontrado = False
+        contE = 1
+        MaxCnt = contE
 
         while not abierta.empty():
             h,x,y= abierta.get()
 
             self.visitados[x][y] = True
 
+            if contE > MaxCnt:
+                MaxCnt=contE
+
+            contE -= 1
+
             if (x, y) == (S[0], S[1]):
-                print("El agente deliberativo ha encontrado la salida en la posicion: " + str(x) + " , " + str(y) + " en " + str(cnt) + " iteraciones")
-                self.pintar_camino(S)
-                return
+                print("Solucion encontrada usando el algoritmo GBFS")
+                encontrado = True
+                break
 
 
             for i,j in movimientos:
@@ -63,16 +70,44 @@ class GBFS:
                     if self.visitados[fila_sig][columna_sig] == False:
                         self.camino[fila_sig][columna_sig] = (x, y) #almacena el camino
                         abierta.put((h_nuevo, fila_sig, columna_sig)) #agrega la posible posicion a la cola
-            cnt+=1
+                        contE += 1
+
+
+        if encontrado:
+            self.pintar_camino()
+            self.caminoRecorrido()
+            print("Nodos expandidos: " + self.nodosExpandidos())
+            print("Numeros maximos en estructura de datos COLA: " + str(MaxCnt))
+        else:
+            print("No se ha encontrado la salida")
 
 
 
-    def pintar_camino(self,S):
-        x , y = S
+    def pintar_camino(self):
+        x , y = self.buscar_salida()
         while self.camino[x][y] is not None:
             x, y = self.camino[x][y]
             if self.lab.tabla[x][y] != "S" and self.lab.tabla[x][y] != "E":
                 self.lab.tabla[x][y] = "+"
+
+
+    def caminoRecorrido(self):
+        print("Camino Recorrido (x,y): ")
+        for i in range(len(self.camino)):
+            for j in range(len(self.camino[0])):
+                if self.camino[i][j] is not None:
+                    print("[",i,",",j,"],",end=" ")
+        print()
+
+
+    def nodosExpandidos(self):
+        nodos = 0
+        for i in range(len(self.visitados)):
+            for j in range(len(self.visitados[0])):
+                if self.visitados[i][j]:
+                    nodos += 1
+        return str(nodos)
+
 
 
 

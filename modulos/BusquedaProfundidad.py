@@ -28,20 +28,32 @@ class BusquedaProfundidad:
         E = self.buscar_entrada()
         S = self.buscar_salida()
 
-        pila = [(self.fila_e, self.columna_e)]
+        pila = [((self.fila_e, self.columna_e),0)]
         self.visitados[self.fila_e][self.columna_e] = True
         self.camino.append((self.fila_e, self.columna_e))
 
         movimientos = [(-1, 0), (1, 0), (0, -1), (0, 1)] #arriba,abajo,izquierda,derecha
-        cnt = 0
+        encontrado = False
+        contE = 1
+        MaxCnt = contE
+        maxProf = 0
 
-        while pila and cnt<1000:
-            pos = pila[-1] #miro el ultimo elemento de la pila
-            x,y = pos
+        while pila:
+            (x,y),prof = pila[-1] #miro el ultimo elemento de la pila
+
+            if len(pila) > MaxCnt:
+                MaxCnt = len(pila)
+
+            contE -= 1
+
+            if prof > maxProf:
+                maxProf = prof
+
             if (x, y) == (S[0], S[1]):
-                print("El agente deliberativo ha encontrado la salida en la posicion: " + str(x) + " , " + str(y) + " en " + str(cnt) + " iteraciones")
+                print("Solucion encontrada usando el algoritmo Busqueda en profundidad")
                 self.pintar_camino()
-                return
+                encontrado = True
+                break
 
             opc = []
             for i,j in movimientos:
@@ -64,15 +76,20 @@ class BusquedaProfundidad:
                 alea = random.randint(0,len(noVisitados)-1)
                 seleccion = noVisitados[alea]
                 self.visitados[seleccion[0]][seleccion[1]] = True
-                pila.append(seleccion)
+                pila.append((seleccion,prof+1))
                 self.camino.append(seleccion)
             else: #si no hay casilla no visitadas retocede
                pila.pop()
                self.camino.pop()
 
 
-            cnt+=1
-        if cnt==1000:
+        if encontrado:
+            self.pintar_camino()
+            self.caminoRecorrido()
+            print("Nodos expandidos: " + self.nodosExpandidos())
+            print("Numeros maximos en estructura de datos PILA: " + str(MaxCnt))
+            print("Profundidad maxima alcanzada: " + str(maxProf))
+        else:
             print("No se ha encontrado la salida")
 
 
@@ -83,6 +100,20 @@ class BusquedaProfundidad:
                 self.lab.tabla[i][j] = "-"
 
 
+    def caminoRecorrido(self):
+        print("Camino Recorrido (x,y): ")
+        for i, j in self.camino:
+            print("[", i, ",", j, "],", end=" ")
+        print()
+
+
+    def nodosExpandidos(self):
+        nodos = 0
+        for i in range(len(self.visitados)):
+            for j in range(len(self.visitados[0])):
+                if self.visitados[i][j]:
+                    nodos += 1
+        return str(nodos)
 
 
 

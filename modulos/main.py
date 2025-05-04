@@ -7,19 +7,30 @@ from ProfIterativa import ProfIterativa
 from ProfLimite import ProfLimite
 from IDA import IDA
 from GBFS import GBFS
+from BusquedaAnchura import BusquedaAnchura
+import time
+
+
+def medir_tiempo_ejecucion(algoritmo):
+    inicio = time.time_ns()
+    algoritmo.moverse()
+    fin = time.time_ns()
+    duracion_microsegundos = (fin - inicio) // 1000
+    print("Tiempo de ejecucion: " + str(duracion_microsegundos) + "ns")
 
 def menu(lab,nombreHeur):
     while True:
         print("\n")
         print("MENU")
         print("1. Iniciar A*")
-        print("2. Iniciar el algoritmo de busqueda en profundidad")
-        print("3. Iniciar el algoritmo de busqueda en anchura")
-        print("4. Iniciar el algoritmo de busqueda en profundidad bidireccional")
-        print("5. Iniciar el algoritmo de busqueda en profundidad iterativa")
-        print("6. Iniciar el algoritmo de busqueda en profundidad con limite")
-        print("7. Iniciar IDA*")
-        print("8. Iniciar GBFS")
+        print("2. Iniciar IDA*")
+        print("3. Iniciar GBFS")
+        print("4. Iniciar el algoritmo de busqueda en profundidad")
+        print("5. Iniciar el algoritmo de busqueda en anchura")
+        print("6. Iniciar el algoritmo de busqueda en profundidad bidireccional")
+        print("7. Iniciar el algoritmo de busqueda en profundidad iterativa")
+        print("8. Iniciar el algoritmo de busqueda en profundidad con limite")
+
         print("9. Reiniciar el laberinto")
         print("10. Cambiar heuristica")
         print("11. Salir")
@@ -27,55 +38,59 @@ def menu(lab,nombreHeur):
 
         if opcion == "1":
             a = A(lab, nombreHeur)
-            a.moverse()
+            medir_tiempo_ejecucion(a)
             print("\n")
             lab.mostrarLaberinto()
 
         if opcion == "2":
-
-            DBF = BusquedaProfundidad(lab)
-            DBF.moverse()
+            ida=IDA(lab,nombreHeur)
+            medir_tiempo_ejecucion(ida)
             print("\n")
             lab.mostrarLaberinto()
 
         if opcion == "3":
-            Bp = BusquedaProfundidad(lab)
-            Bp.moverse()
+            gbfs = GBFS(lab, nombreHeur)
+            medir_tiempo_ejecucion(gbfs)
             print("\n")
             lab.mostrarLaberinto()
 
         if opcion == "4":
-            pB = BusquedaProfundidad(lab)
-            pB.moverse()
+            DBF = BusquedaProfundidad(lab)
+            medir_tiempo_ejecucion(DBF)
             print("\n")
             lab.mostrarLaberinto()
 
         if opcion == "5":
-            pi = ProfIterativa(lab)
-            pi.moverse()
+            Ba = BusquedaAnchura(lab)
+            medir_tiempo_ejecucion(Ba)
             print("\n")
             lab.mostrarLaberinto()
 
         if opcion == "6":
-            print("\n")
-            print("Ingrese el limite de profundidad: ")
-            limite = int(input())
-            pl = ProfLimite(lab)
-            pl.moverse(limite)
+            Bb = ProfBidireccional(lab)
+            medir_tiempo_ejecucion(Bb)
             print("\n")
             lab.mostrarLaberinto()
 
         if opcion == "7":
-            ida=IDA(lab,nombreHeur)
-            ida.moverse()
+            pi = ProfIterativa(lab)
+            medir_tiempo_ejecucion(pi)
             print("\n")
             lab.mostrarLaberinto()
 
         if opcion == "8":
-            gbfs = GBFS(lab, nombreHeur)
-            gbfs.moverse()
+            print("\n")
+            print("Ingrese el limite de profundidad: ")
+            limite = int(input())
+            pl = ProfLimite(lab)
+            inicio = time.time_ns()
+            pl.moverse(limite)
+            fin = time.time_ns()
+            duracion_microsegundos = (fin - inicio) // 1000
+            print("Tiempo de ejecucion: " + str(duracion_microsegundos) + "ns")
             print("\n")
             lab.mostrarLaberinto()
+
 
 
         if opcion == "9":

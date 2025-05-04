@@ -31,15 +31,21 @@ class ProfLimite:
         self.camino.append((self.fila_e, self.columna_e))
 
         movimientos = [(-1, 0), (1, 0), (0, -1), (0, 1)] #arriba,abajo,izquierda,derecha
-        cnt = 0
+
+        contE = 1
+        MaxCnt = contE
+        encontrado = False
 
         while pila:
             pos = pila[-1] #miro el ultimo elemento de la pila
             x,y = pos
             if (x, y) == (S[0], S[1]):
-                print("El agente deliberativo ha encontrado la salida en la posicion: " + str(x) + " , " + str(y) + " en " + str(cnt) + " iteraciones")
-                self.pintar_camino()
-                return
+                encontrado=True
+                break
+
+            if len(pila) > MaxCnt:
+                MaxCnt=len(pila)
+
 
             prof=len(self.camino) - 1
             if prof >= limite:
@@ -76,7 +82,16 @@ class ProfLimite:
                self.camino.pop()
 
 
-            cnt+=1
+        if encontrado:
+            self.pintar_camino()
+            self.caminoRecorrido()
+            print("Nodos expandidos: " + self.nodosExpandidos())
+            print("Numeros maximos en estructura de datos PILA: " + str(MaxCnt))
+            print("Profundidad maxima alcanzada: " + str(limite))
+
+        else:
+            print("No se ha encontrado la salida")
+
 
 
 
@@ -87,7 +102,22 @@ class ProfLimite:
                 self.lab.tabla[i][j] = "-"
 
 
+    def caminoRecorrido(self):
+        print("Camino Recorrido (x,y): ")
+        for i in range(len(self.camino)):
+            for j in range(len(self.camino[0])):
+                if self.camino[i][j] is not None:
+                    print("[",i,",",j,"],",end=" ")
+        print()
 
+
+    def nodosExpandidos(self):
+        nodos = 0
+        for i in range(len(self.visitados)):
+            for j in range(len(self.visitados[0])):
+                if self.visitados[i][j]:
+                    nodos += 1
+        return str(nodos)
 
 
 
